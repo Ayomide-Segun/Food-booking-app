@@ -1,0 +1,12 @@
+1.  To start front end
+    a. npm create vite@latest app_name
+    b. npm install -D tailwindcss@3.4.17 postcss autoprefixer
+    c. npx tailwindcss init -p
+    d. npm install clsx
+
+2.  To start the frontend
+    a. npm init -y
+    b. npm install express mongoose dotenv
+    c. Put the mongoDB url in the .env file
+    d. npm install bcrypt
+
