@@ -1,4 +1,3 @@
-const { JsonWebTokenError } = require('jsonwebtoken');
 const User = require('../Model/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -6,13 +5,7 @@ const jwt = require('jsonwebtoken');
 
 exports.register = async(req, res) => {
     const { username, email, password } = req.body;
-    try {
-        if (!username || !email || !password) {
-            return res.status(400).json({
-                message: 'All fields required'
-            });
-        }
-    
+    try {    
         const userExists = await User.findOne({username});
         if (userExists) {
             return res.status(400).json({
@@ -31,6 +24,7 @@ exports.register = async(req, res) => {
     
         const user = await User.create({
             username,
+            email,
             password: hashedPassword
         });
     
@@ -57,7 +51,7 @@ exports.login = async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(400).json({
-                message: 'Invalid credentials'
+                message: 'Incorrect password'
             })
         };
     
